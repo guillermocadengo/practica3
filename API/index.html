@@ -1,27 +1,138 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscar pokemon</title>
-</head>
-<body>
-    <h1>POKEMON APP</h1>
-    <form action="">
-        <label for="nombre">Nombre:</label>
-        <input type="text" name="nombre" id="nombre">
-        <button id="buscarboton">Boton</button>
-        <h3>Informacion de Pokemons</h3>
-        <p>Peso:</p>
-        <p id="peso"></p>
-        <p>Imagen</p>
-        <img id="imagen" src="" alt="">
-        <p>Sonido:</p>
-        <audio id="sonido" controls src="app.js"></audio>
+    <title>Star Wars Finder</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at top, #000015, #0a0a0a);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 20px;
+        }
 
-        <p>Items:</p>
-        <ul id="listaitems"></ul>
+        h1 {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ffe81f;
+            text-shadow: 0 0 10px #ffe81f;
+            margin-bottom: 30px;
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(4px);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        label {
+            font-size: 14px;
+            letter-spacing: 1px;
+            color: #bbb;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 6px;
+            background: #111;
+            color: #ffe81f;
+            outline: none;
+            font-size: 15px;
+        }
+
+        button {
+            width: 100%;
+            background: #ffe81f;
+            color: #000;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #fff45a;
+            transform: scale(1.02);
+        }
+
+        h3 {
+            margin-top: 25px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 5px;
+            text-align: center;
+        }
+
+        #infoPersonaje {
+            background: rgba(255, 255, 255, 0.05);
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        #infoPersonaje p {
+            margin: 8px 0;
+            font-size: 15px;
+        }
+
+        #infoPersonaje span {
+            color: #ffe81f;
+        }
+
+        #errorMensaje {
+            margin-top: 15px;
+            text-align: center;
+            color: #ff4f4f;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 40px;
+            color: #666;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Star Wars Buscador</h1>
+
+    <form>
+        <label for="nombre">Ingresa un personaje:</label>
+        <input type="text" id="nombre" placeholder="Ej: Luke Skywalker">
+        <button id="botonBuscar">Buscar</button>
+
+        <h3>Datos del Personaje</h3>
+
+        <div id="infoPersonaje">
+            <p><b>Nombre:</b> <span id="infoNombre"></span></p>
+            <p><b>Masa:</b> <span id="infoMasa"></span></p>
+            <p><b>Altura:</b> <span id="infoAltura"></span></p>
+            <p><b>Color de ojos:</b> <span id="infoOjos"></span></p>
+        </div>
+
+        <p id="errorMensaje"></p>
     </form>
+
+    <footer>Datos obtenidos de la <a href="https://swapi.dev" target="_blank" style="color:#ffe81f;">SWAPI</a></footer>
+
     <script src="app.js"></script>
 </body>
 </html>

@@ -1,29 +1,61 @@
-const inputNombre = document.getElementById("nombre")
-const botonbuscar = document.getElementById("botonbuscar")
-const peso = document.getElementById("peso")
-const imagen = document.getElementById("imagen")
-const sonido = document.getElementById("sonido")
-const listaitems = document.getElementById("listaitems")
+const inputNombre = document.getElementById("nombre");
+const botonBuscar = document.getElementById("botonBuscar");
+const infoNombre = document.getElementById("infoNombre");
+const infoMasa = document.getElementById("infoMasa");
+const infoAltura = document.getElementById("infoAltura");
+const infoOjos = document.getElementById("infoOjos");
+const errorMensaje = document.getElementById("errorMensaje");
 
-async function buscarInfoPokemon(){
-    const respuesta = await fetch("https://pokeapi.co/api/v2/pokemon/" + inputNombre.value)
-    const infoPokemon = await respuesta.json();
+async function buscarPersonaje() {
+    infoNombre.innerText = "...";
+    infoMasa.innerText = "...";
+    infoAltura.innerText = "...";
+    infoOjos.innerText = "...";
+    errorMensaje.innerText = "";
 
-    peso.innerText= infoPokemon.weight;
-    imagen.src = infoPokemon.sprites.other.home.front_default;// poner una imagen 
+    const nombrePersonaje = inputNombre.value.trim().toLowerCase();
 
-    sonido.src = infoPokemon.cries.latest;// poner sonido 
+    if (nombrePersonaje === "") {
 
-    infoPokemon.held_items.forEach(item => {
-        const itemLi = document.createElement("li");
-        itemLi.innerText = i.item.name;
-        listaitems.appendChild(itemLi);
-    });
+        errorMensaje.innerText = "Por favor, ingresa un nombre.";
+        return;
+
+    }
+
+
+    try {
+        const respuesta = await fetch("https://swapi.dev/api/people/?search=" + nombrePersonaje);
+
+        if (!respuesta.ok) {
+            throw new Error("Error al conectar con la API.");
+        }
+
+        const data = await respuesta.json();
+
+        if (data.count === 0 || !data.results[0]) {
+            throw new Error("Personaje no encontrado.");
+        }
+
+        const personaje = data.results[0];
+
+        infoNombre.innerText = personaje.name;
+        infoMasa.innerText = personaje.mass + " kg";
+        infoAltura.innerText = personaje.height + " cm";
+        infoOjos.innerText = personaje.eye_color;
+
+    } catch (error) {
+        errorMensaje.innerText = "Error: " + error.message;
+        infoNombre.innerText = "";
+        infoMasa.innerText = "";
+        infoAltura.innerText = "";
+        infoOjos.innerText = "";
+
+    }
+
 }
 
-buscarboton.addEventListener("click", e=>{
+botonBuscar.addEventListener("click", e => {
     e.preventDefault();
-    console.log("listo")
+    buscarPersonaje();
 
-    buscarInfoPokemon();
 });
